@@ -1,0 +1,31 @@
+# This file defines the 'git:sync' command for the Gemini CLI,
+
+description = "Automates adding file, committing with a generated message and updating the PR's."
+
+prompt = """
+Your task is to create a commit with an insightful message for the currently staged changes, push the branch, and create or update a pull request.
+The project's repository instructions and contribution guidelines are in the **GEMINI.md** file.
+
+
+### Workflow
+
+1. **Review Staged Changes:**
+    - !{git status}
+    - !{git diff --staged}
+    - ** YOU MUST** analys the current changes and understand the changes
+
+2. **Generate Commit Message:**
+    - Based on your analysis, generate a commit message that follows the conventional commit format.
+
+3. **Commit Changes:**
+    - Once you have the commit message, use it to commit the changes.
+    - Example: `git commit -m "feat: add new feature"`
+
+4. **Push Changes:**
+    - Push the committed changes to the remote repository.
+    - `git push`
+
+5. **Create or Update Pull Request:**
+    - Create a new pull request or update an existing one.
+    - `gh pr create --fill` or check for existing PR.
+"""
